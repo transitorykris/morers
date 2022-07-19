@@ -25,7 +25,7 @@ fn main() {
                 return // we're done
             }
             Ok(_) => {
-                println!("{}", contents);   // TODO: a better print, there will be two new lines
+                print!("{}", contents);
             }
             Err(_) => {
                 panic!("something went wrong");
