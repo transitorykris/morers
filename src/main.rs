@@ -18,6 +18,6 @@ fn main() {
             Err(_) => {
                 panic!("something went wrong");
             }
-        }  // Note: we can panic if pipe breaks, how to catch?
+        }
     }
 }
