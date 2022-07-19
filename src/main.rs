@@ -1,9 +1,12 @@
+use std::env;
 use std::fs::File;
 use std::io::BufReader;
 use std::io::prelude::*;
 
 fn main() {
-    let file = File::open("/users/krisfoster/Desktop/jane.txt").unwrap();   // TODO check for errors
+    let args: Vec<String> = env::args().collect();
+
+    let file = File::open(&args[2]).unwrap();   // TODO check for errors
     let mut buf_reader = BufReader::new(file);
 
     loop {
