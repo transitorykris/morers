@@ -18,6 +18,8 @@ fn main() {
         }
     };
 
+    let mut keyboard = File::open("/dev/tty").unwrap(); // XXX check for errors!
+
     let mut count = 0;
     loop {
         let mut contents = String::new();   // may be faster to clear it than allocate new?
@@ -30,7 +32,8 @@ fn main() {
                 count = count + 1;
                 if count == 40 {
                     print!("--more--");
-                    break;
+                    let mut buf = String::new();
+                    keyboard.read_to_string(&mut buf);
                 }
             }
             Err(_) => {
