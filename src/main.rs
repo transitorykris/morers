@@ -18,6 +18,7 @@ fn main() {
         }
     };
 
+    let mut count = 0;
     loop {
         let mut contents = String::new();   // may be faster to clear it than allocate new?
         match reader.read_line(&mut contents) {
@@ -26,6 +27,11 @@ fn main() {
             }
             Ok(_) => {
                 print!("{}", contents);
+                count = count + 1;
+                if count == 40 {
+                    print!("--more--");
+                    break;
+                }
             }
             Err(_) => {
                 panic!("something went wrong");
