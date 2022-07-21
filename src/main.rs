@@ -18,6 +18,7 @@ fn main() {
         }
     };
 
+    // TODO: Handle an environment where /dev/tty doesn't exit
     let keyboard = File::open("/dev/tty").unwrap(); // XXX check for errors!
     let mut key_buffer = BufReader::new(keyboard);
 
