@@ -18,7 +18,8 @@ fn main() {
         }
     };
 
-    let mut keyboard = File::open("/dev/tty").unwrap(); // XXX check for errors!
+    let keyboard = File::open("/dev/tty").unwrap(); // XXX check for errors!
+    let mut key_buffer = BufReader::new(keyboard);
 
     let mut count = 0;
     loop {
@@ -32,8 +33,10 @@ fn main() {
                 count = count + 1;
                 if count == 40 {
                     print!("--more--");
+                    io::stdout().flush().unwrap();  // the print! macro does not flush
                     let mut buf = String::new();
-                    keyboard.read_to_string(&mut buf);
+                    key_buffer.read_line(&mut buf).unwrap(); // XXX check for errors!
+                    count = 0;
                 }
             }
             Err(_) => {
